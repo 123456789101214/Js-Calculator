@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Js-Color-Changer</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #container {
+            width: 300px;
+            min-height: 450px;
+            margin: 40px auto;
+            background: #000;
+            border: 4px solid #ec0404;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0px 0px 5px 2px #ec0404;
+            transition: 0.3s;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 23px;
+            background-color: #000000;
+            color: #ec0404;
+            border-radius: 40px;
+        }
+
+        table {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .text {
+            margin: 25px;
+        }
+
+        .text input {
+            padding: 12px;
+            width: 80%;
+            border-radius: 20px;
+            outline: none;
+            border: 1px solid #000;
+            transition: 0.3s;
+        }
+
+        .text input:hover {
+            border: 1px solid #ec0404;
+            box-shadow: 0px 0px 5px 2px #ec0404;
+        }
+
+        .btn {
+            background: #474343;
+            min-width: 50px;
+            height: 55px;
+            padding: 15px 18px;
+            margin: 4px;
+            font-size: 20px;
+            color: #fff;
+            border: 1px solid #000;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            box-shadow: 0px 0px 5px 2px #ec0404;
+            border: 1px solid #ec0404;
+        }
+
+        .zero {
+            width: 114px;
+        }
+
+        .equal-btn {
+            height: 125px;
+        }
+
+        button:hover {
+            background: #574f4f;
+        }
+
+        .buttons{
+            margin: 0 auto;
+            background: transparent;
+            outline: 4px solid #ec0404;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+
+        .buttons button{
+            margin: 40px;
+            min-width: 120px;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            transition: 0.5s;
+        }
+
+        .effectChange_1 {
+            background: #000066;
+            color: #fff;
+            padding: 12px 20px;
+        }
+
+        .effectChange_1:hover{
+            background: #000;
+        }
+
+        .effectChange_2 {
+            background: #006666;
+            color: #fff;
+            padding: 12px 20px;
+        }
+
+        .effectChange_2:hover{
+            background: #000;
+        }
+
+        .effectReset {
+            background: #9b0606;
+            color: #fff;
+            padding: 12px 20px;
+        }
+
+        .effectReset:hover{
+            background: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <form name="input" class="text">
+            <input name="text" class="text-box">
+        </form>
+        <table>
+            <tr>
+                <td class="btns"><button class="btn" id="bth" type="button" value="C"
+                        onclick="input.text.value = ' ' ">C</button></td>
+                <td class="btns"><button class="btn" type="button" value="B" onclick="backspace()">B</button></td>
+                <td class="btns"><button class="btn" type="button" value="/" onclick="insert('/')">/</button></td>
+                <td class="btns"><button class="btn" type="button" value="*" onclick="insert('*')">*</button></td>
+            </tr>
+
+            <tr>
+                <td class="btns"><button class="btn" type="button" value="7" onclick="insert(7)">7</button></td>
+                <td><button class="btn" type="button" value="8" onclick="insert(8)">8</button></td>
+                <td><button class="btn" type="button" value="9" onclick="insert(9)">9</button></td>
+                <td><button class="btn" type="button" value="-" onclick="insert('-')">-</button></td>
+            </tr>
+
+            <tr>
+                <td><button class="btn" type="button" value="4">4</button></td>
+                <td><button class="btn" type="button" value="5" onclick="insert(5)">5</button></td>
+                <td><button class="btn" type="button" value="6" onclick="insert(6)">6</button></td>
+                <td><button class="btn" type="button" value="+" onclick="insert('+')">+</button></td>
+            </tr>
+
+            <tr>
+                <td><button class="btn" type="button" value="1" onclick="insert(1)">1</button></td>
+                <td><button class="btn" type="button" value="2" onclick="insert(2)">2</button></td>
+                <td><button class="btn" type="button" value="3" onclick="insert(3)">3</button></td>
+                <td rowspan="5"><button class="btn equal-btn" type="button" value="=" onclick="equal()">=</button></td>
+            </tr>
+
+            <tr>
+                <td colspan=2><button class="btn zero" type="button" value="0" onclick="insert(0)">0</button></td>
+                <td><button class="btn" type="button" value="." onclick="insert('.')">.</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="buttons">
+        <button onclick="method1()" class="effectChange_1">Design 01</button>
+        <button onclick="method2()" class="effectChange_2">Design 02</button>
+        <button onclick="normal()" class="effectReset">Reset</button>
+    </div>
+
+
+
+    <script>
+
+        // calculator makes functionally
+        function insert(number) {
+            document.input.text.value = document.input.text.value + number;
+        }
+
+        function equal() {
+            var eql = document.input.text.value;
+            if (eql) {
+                document.input.text.value = eval(eql)
+            }
+        }
+
+        function backspace() {
+            var eql = document.input.text.value;
+            document.input.text.value = eql.substring(0, eql.length - 1);
+        }
+
+
+
+        // background change funtions
+        function method1() {
+            var body = document.getElementById('container');
+            body.style.background = "#000066";
+            body.style.boxShadow = "0px 0px 5px 2px #000066";
+            body.style.border = "4px solid #1a1aff";
+
+
+            var btn = document.getElementsByClassName('btn');
+            for (var x = 0; x < btn.length; x++) {
+                btn[x].style.background = "black";
+            }
+
+            var textbox = document.querySelector('input.text-box');
+            textbox.style.background = "#ccccff";
+            textbox.style.color = "#000066";
+        }
+
+        function method2() {
+            var body = document.getElementById('container');
+            body.style.background = "#006666";
+            body.style.boxShadow = "0px 0px 5px 2px #006666";
+            body.style.border = "4px solid #00b3b3";
+
+
+            var btn = document.getElementsByClassName('btn');
+            for (var x = 0; x < btn.length; x++) {
+                btn[x].style.background = "black";
+            }
+
+            var textbox = document.querySelector('input.text-box');
+            textbox.style.background = "#b3ffff";
+            textbox.style.color = "#00b3b3";
+        }
+
+        function normal() {
+            var body = document.getElementById('container');
+            body.style.background = "#000";
+            body.style.boxShadow = "0px 0px 5px 2px #ec0404";
+            body.style.border = "4px solid #ec0404";
+
+
+            var btn = document.getElementsByClassName('btn');
+            for (var x = 0; x < btn.length; x++) {
+                btn[x].style.background = "#474343";
+            }
+
+            var textbox = document.querySelector('input.text-box');
+            textbox.style.background = "#fff";
+            textbox.style.color = "#fff";
+        }
+    </script>
+</body>
+</html>
